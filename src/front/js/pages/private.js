@@ -1,24 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
 
-export const Home = () => {
+export const Private = () => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    if (store.token && store.token != "" && store.token != undefined)
-      actions.getMessage();
-  }, [store.token]);
+    actions.private(store.token);
+  }, []);
 
   return (
     <div className="text-center mt-5">
-      <h1>Hello Rigo!!</h1>
-      <p>
-        <img src={rigoImageUrl} />
-      </p>
+      <h1>Dashboard</h1>
+      <p>Welcome {store.message}!</p>
       <div className="alert alert-info">
-        {!store.token ? "Please Log In or Sign Up" : "Hello!"}
+        {store.token
+          ? "You're logged in!"
+          : "You're not Logged In, Please Log In!"}
       </div>
       <p>
         This boilerplate comes with lots of documentation:{" "}
